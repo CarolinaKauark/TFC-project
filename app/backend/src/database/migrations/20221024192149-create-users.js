@@ -9,10 +9,10 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
-      username: { type: Sequelize.STRING },
-      role: { type: Sequelize.STRING },
-      email: { type: Sequelize.STRING },
-      password: { type: Sequelize.STRING },
+      username: { type: Sequelize.STRING, allowNull: false },
+      role: { type: Sequelize.STRING, allowNull: false },
+      email: { type: Sequelize.STRING, allowNull: false },
+      password: { type: Sequelize.STRING, allowNull: false },
     });
 
   },

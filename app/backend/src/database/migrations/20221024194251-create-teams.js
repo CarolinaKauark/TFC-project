@@ -9,7 +9,10 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
-      team_name: { type: Sequelize.STRING },
+      team_name: { 
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
     });
   },
 
