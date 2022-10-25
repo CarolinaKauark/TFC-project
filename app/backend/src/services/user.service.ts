@@ -3,7 +3,7 @@ import { IUser, IUserService } from '../interfaces/user.interfaces';
 import User from '../database/models/user';
 import ErrorGenerate from '../helpers/errorGenerate';
 import statusCodes from '../helpers/statusCode';
-import checkPassword from '../helpers/bcrypt';
+import { checkPassword } from '../helpers/bcrypt';
 
 class UserService implements IUserService {
   constructor(private userModel = User) {}

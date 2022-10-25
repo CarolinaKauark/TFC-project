@@ -1,4 +1,4 @@
-import Joi = require('joi');
+import * as Joi from 'joi';
 
 const schemaLogin = Joi.object({
   email: Joi.string().email().required(),
