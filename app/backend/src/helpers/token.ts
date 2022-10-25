@@ -1,8 +1,8 @@
 import { verify, sign, JwtPayload, Secret, SignOptions } from 'jsonwebtoken';
-// import dotenv from 'dotenv';
+import dotenv = require('dotenv');
 import { IUser } from '../interfaces/user.interfaces';
 
-// dotenv.config();
+dotenv.config();
 
 const jwtConfig = {
   expiresIn: '1d',
@@ -10,7 +10,12 @@ const jwtConfig = {
 };
 
 export const generateToken = (user: Omit<IUser, 'password'>) => {
-  sign(user, process.env.JWT_SECRET as Secret, jwtConfig as SignOptions);
+  const token = sign(
+    { user },
+    process.env.JWT_SECRET as Secret || 'secret',
+    jwtConfig as SignOptions,
+  );
+  return token;
 };
 
 export const authenticate = (token: string): JwtPayload => {

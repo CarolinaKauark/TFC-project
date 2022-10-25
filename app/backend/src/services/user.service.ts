@@ -10,6 +10,8 @@ class UserService implements IUserService {
 
   async login(body: IUser): Promise<string | void> {
     const user = await this.userModel.findOne({ where: { email: body.email } });
+    console.log(user);
+
     if (!user) throw new ErrorGenerate('Incorrect email or password', statusCodes.unauthorized);
     const success = checkPassword(body.password, user.password);
     if (!success) throw new ErrorGenerate('Incorrect email or password', statusCodes.unauthorized);
