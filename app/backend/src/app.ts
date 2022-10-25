@@ -1,4 +1,5 @@
 import * as express from 'express';
+import loginRouter from './routes/login.routes';
 
 class App {
   public app: express.Express;
@@ -7,6 +8,7 @@ class App {
     this.app = express();
 
     this.config();
+    this.routes();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
@@ -19,9 +21,12 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
+
+  private routes(): void {
+    this.app.use('/login', loginRouter);
   }
 
   public start(PORT: string | number):void {
