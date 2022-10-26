@@ -18,6 +18,16 @@ class UserController {
       next(error);
     }
   };
+
+  getRole: RequestHandler = async (req, res, next) => {
+    try {
+      const { userId } = req.headers;
+      const role = await this.userService.findById(userId as string);
+      return res.status(StatusCodes.OK).json({ role });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default UserController;

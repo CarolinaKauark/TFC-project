@@ -20,6 +20,11 @@ class UserService implements IUserService {
     const token = generateToken({ email, id, role });
     return token;
   }
+
+  public async findById(userId: string): Promise<any> {
+    const user = await this.userModel.findByPk(userId);
+    return user?.role;
+  }
 }
 
 export default UserService;

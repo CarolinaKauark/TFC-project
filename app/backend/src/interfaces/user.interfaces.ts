@@ -9,6 +9,9 @@ export interface IPayload extends IUser {
   email: string;
 }
 
+export type IRole = 'admin' | 'user';
+
 export interface IUserService {
   login(body: IUser): Promise<string | void>;
+  findById(id: string): Promise<IRole>;
 }
