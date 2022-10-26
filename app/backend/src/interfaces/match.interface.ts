@@ -12,5 +12,9 @@ export interface IMatch {
 }
 
 export interface IMatchService {
-  getAllMatches(): Promise<IMatch[] | []>
+  getAllMatches(inProgress?: IQuery): Promise<IMatch[] | []>
+}
+
+export interface IQuery {
+  where: { inProgress: boolean }
 }
