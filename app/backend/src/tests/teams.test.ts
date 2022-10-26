@@ -6,8 +6,10 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import User from '../database/models/user';
-import { tokenMock, userMock } from './mocks/token.mock';
 import { Response } from 'superagent';
+import Team from '../database/models/team';
+import { allTeams, team } from './mocks/team.mock';
+import { ITeam } from '../interfaces/team.interfaces';
 
 chai.use(chaiHttp);
 
@@ -19,13 +21,35 @@ describe('Testa a rota login', () => {
 
   beforeEach(async () => {
     sinon
-      .stub(User, "findOne")
-      .resolves(userMock as unknown as User);
-    sinon.stub(jwt, 'sign').resolves(tokenMock);
+      .stub(Team, "findAll")
+      .resolves(allTeams as ITeam[] | any);
+    sinon
+      .stub(Team, "findByPk")
+      .resolves(team as ITeam | any);
   });
 
   afterEach(()=>{
-    (User.findOne as sinon.SinonStub).restore();
-    (jwt.sign as sinon.SinonStub).restore();
+    (Team.findAll as sinon.SinonStub).restore();
+    (Team.findByPk as sinon.SinonStub).restore();
   })
+
+  it('testa se o retona todos os times na rota get /teams', async () => {
+    const chaiHttpResponse = await chai
+       .request(app)
+       .get('/teams')
+
+    expect(chaiHttpResponse.status).to.equal(200);
+    expect(chaiHttpResponse.body).to.deep.equal(allTeams);
+  });
+
+  it('testa se o retona o time correto na rota get /teams/5', async () => {
+    const chaiHttpResponse = await chai
+       .request(app)
+       .get('/teams/5')
+
+    expect(chaiHttpResponse.status).to.equal(200);
+    expect(chaiHttpResponse.body).to.deep.equal(team);
+  });
+
+
 });
