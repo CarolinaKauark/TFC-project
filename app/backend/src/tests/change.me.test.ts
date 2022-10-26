@@ -17,11 +17,11 @@ describe('Testa a rota login', () => {
 
   let chaiHttpResponse: Response;
 
-  before(async () => {
-    sinon
-      .stub(User, "findOne")
-      .resolves(tokenMock);
-  });
+  // before(async () => {
+  //   sinon
+  //     .stub(User, "findOne")
+  //     .resolves(tokenMock);
+  // });
 
   // after(()=>{
   //   (Example.findOne as sinon.SinonStub).restore();

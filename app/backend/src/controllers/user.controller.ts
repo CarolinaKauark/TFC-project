@@ -1,8 +1,9 @@
 import { RequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { IUserService } from '../interfaces/user.interfaces';
 
 class UserController {
-  private readonly userService: IUserService;
+  private userService: IUserService;
 
   constructor(userService: IUserService) {
     this.userService = userService;
@@ -12,7 +13,7 @@ class UserController {
     try {
       const { body } = req;
       const token = await this.userService.login(body);
-      return res.status(200).json(token);
+      return res.status(StatusCodes.OK).json({ token });
     } catch (error) {
       next(error);
     }
