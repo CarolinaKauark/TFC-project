@@ -1,4 +1,4 @@
-import { IMatch, IMatchService, IQuery } from '../interfaces/match.interface';
+import { IGoals, IMatch, IMatchService, IQuery } from '../interfaces/match.interface';
 import Match from '../database/models/match';
 import Team from '../database/models/team';
 
@@ -23,8 +23,12 @@ class MatchService implements IMatchService {
     return this.matchModel.findByPk(id);
   }
 
-  async updateMatchInProgress(id: number): Promise<any> {
-    return this.matchModel.update({ inProgress: false }, { where: { id } });
+  async updateMatchInProgress(id: number): Promise<void> {
+    await this.matchModel.update({ inProgress: false }, { where: { id } });
+  }
+
+  async updateMatch(match: IGoals, id: number): Promise<void> {
+    await this.matchModel.update(match, { where: { id } });
   }
 }
 

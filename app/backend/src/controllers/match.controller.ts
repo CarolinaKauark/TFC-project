@@ -24,8 +24,6 @@ class MatchController {
       const { body } = req;
       const newMatchId = await this.matchService.insertMatch({ ...body, inProgress: true });
 
-      //   const newMatch = await this.matchService.findById(newMatchId);
-
       return res.status(201).json(newMatchId);
     } catch (error) {
       next(error);
@@ -37,6 +35,17 @@ class MatchController {
       const { id } = req.params;
       await this.matchService.updateMatchInProgress(id as unknown as number);
       return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateMatch: RequestHandler = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { body } = req;
+      await this.matchService.updateMatch(body, id as unknown as number);
+      return res.status(200).json({ message: 'Match is updated' });
     } catch (error) {
       next(error);
     }

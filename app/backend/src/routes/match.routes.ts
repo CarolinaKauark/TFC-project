@@ -11,6 +11,7 @@ const matchService = new MatchService(Match);
 const matchController = new MatchController(matchService);
 
 matchRoutes.patch('/:id/finish', matchController.updateMatchInProgress);
+matchRoutes.patch('/:id', matchController.updateMatch);
 matchRoutes.post('/', authorizationToken, matchMiddleware, matchController.insertMatch);
 matchRoutes.get('/', matchController.getAllMatches);
 
