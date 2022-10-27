@@ -15,7 +15,7 @@ const authorizationToken: RequestHandler = (req, _res, next) => {
 
     next();
   } catch (err) {
-    throw new ErrorGenerate('Invalid token', StatusCodes.UNAUTHORIZED);
+    throw new ErrorGenerate('Token must be a valid token', StatusCodes.UNAUTHORIZED);
   }
 };
 

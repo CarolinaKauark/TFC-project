@@ -9,8 +9,15 @@ const matchMiddleware: RequestHandler = async (req, _res, next) => {
   const findHomeTeam = await teamService.findById(homeTeam);
   const findAwayTeam = await teamService.findById(awayTeam);
 
+  if (homeTeam === awayTeam) {
+    next(new ErrorGenerate(
+      'It is not possible to create a match with two equal teams',
+      StatusCodes.UNPROCESSABLE_ENTITY,
+    ));
+  }
+
   if (!findHomeTeam || !findAwayTeam) {
-    throw new ErrorGenerate('Team id invalid', StatusCodes.BAD_REQUEST);
+    next(new ErrorGenerate('There is no team with such id!', StatusCodes.NOT_FOUND));
   }
 
   next();
