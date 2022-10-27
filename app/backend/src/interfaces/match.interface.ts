@@ -15,6 +15,7 @@ export interface IMatchService {
   getAllMatches(inProgress?: IQuery): Promise<IMatch[] | []>;
   insertMatch(match: IMatch): Promise<number>;
   findById(id: number): Promise<IMatch | null>;
+  updateMatchInProgress(id: number): Promise<any>;
 }
 
 export interface IQuery {

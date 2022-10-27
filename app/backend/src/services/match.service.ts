@@ -22,6 +22,10 @@ class MatchService implements IMatchService {
   async findById(id: number): Promise<IMatch | null> {
     return this.matchModel.findByPk(id);
   }
+
+  async updateMatchInProgress(id: number): Promise<any> {
+    return this.matchModel.update({ inProgress: false }, { where: { id } });
+  }
 }
 
 export default MatchService;

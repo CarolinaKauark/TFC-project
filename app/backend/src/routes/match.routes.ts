@@ -9,6 +9,7 @@ const matchRoutes = Router();
 const matchService = new MatchService(Match);
 const matchController = new MatchController(matchService);
 
+matchRoutes.patch('/:id/finish', matchController.updateMatchInProgress);
 matchRoutes.post('/', matchMiddleware, matchController.insertMatch);
 matchRoutes.get('/', matchController.getAllMatches);
 

@@ -31,6 +31,16 @@ class MatchController {
       next(error);
     }
   };
+
+  updateMatchInProgress: RequestHandler = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      await this.matchService.updateMatchInProgress(id as unknown as number);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchController;
