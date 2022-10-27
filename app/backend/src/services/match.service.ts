@@ -1,9 +1,9 @@
 import { IMatch, IMatchService, IQuery } from '../interfaces/match.interface';
-import Matche from '../database/models/matche';
+import Match from '../database/models/match';
 import Team from '../database/models/team';
 
 class MatchService implements IMatchService {
-  constructor(private matchModel = Matche) {}
+  constructor(private matchModel = Match) {}
 
   async getAllMatches(inProgress?: IQuery): Promise<IMatch[] | []> {
     return this.matchModel.findAll({
@@ -13,6 +13,14 @@ class MatchService implements IMatchService {
       ],
       ...inProgress,
     });
+  }
+
+  async insertMatch(match: IMatch): Promise<any> {
+    return this.matchModel.create(match);
+  }
+
+  async findById(id: number): Promise<IMatch | null> {
+    return this.matchModel.findByPk(id);
   }
 }
 

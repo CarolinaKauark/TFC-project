@@ -1,7 +1,7 @@
 import { ITeam } from './team.interfaces';
 
 export interface IMatch {
-  id: number;
+  id?: number;
   homeTeam: number;
   homeTeamGoals: number;
   awayTeam: number;
@@ -12,7 +12,9 @@ export interface IMatch {
 }
 
 export interface IMatchService {
-  getAllMatches(inProgress?: IQuery): Promise<IMatch[] | []>
+  getAllMatches(inProgress?: IQuery): Promise<IMatch[] | []>;
+  insertMatch(match: IMatch): Promise<number>;
+  findById(id: number): Promise<IMatch | null>;
 }
 
 export interface IQuery {

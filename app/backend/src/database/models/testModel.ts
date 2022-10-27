@@ -1,7 +1,7 @@
-import Matche from './matche';
+import Match from './match';
 
 (async () => {
-  const user = await Matche.findAll({ raw: true });
+  const user = await Match.findAll({ raw: true });
   console.log(user);
   process.exit(0);
 })();

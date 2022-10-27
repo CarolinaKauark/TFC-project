@@ -2,7 +2,7 @@ import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import Team from './team';
 
-class Matche extends Model {
+class Match extends Model {
   declare id: number;
   declare homeTeam: number;
   declare homeTeamGoals: number;
@@ -11,7 +11,7 @@ class Matche extends Model {
   declare inProgress: boolean;
 }
 
-Matche.init({
+Match.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -31,12 +31,12 @@ Matche.init({
   underscored: true,
 });
 
-Matche.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
 
-Matche.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-Team.hasMany(Matche, { foreignKey: 'homeTeam', as: 'teamHome' });
+Team.hasMany(Match, { foreignKey: 'homeTeam', as: 'teamHome' });
 
-Team.hasMany(Matche, { foreignKey: 'awayTeam', as: 'teamAway' });
+Team.hasMany(Match, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-export default Matche;
+export default Match;

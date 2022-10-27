@@ -1,13 +1,15 @@
 import { Router } from 'express';
-import Matche from '../database/models/matche';
+import matchMiddleware from '../middlewares/match.middleware';
+import Match from '../database/models/match';
 import MatchController from '../controllers/match.controller';
 import MatchService from '../services/match.service';
 
 const matchRoutes = Router();
 
-const matchService = new MatchService(Matche);
+const matchService = new MatchService(Match);
 const matchController = new MatchController(matchService);
 
+matchRoutes.post('/', matchMiddleware, matchController.insertMatch);
 matchRoutes.get('/', matchController.getAllMatches);
 
 export default matchRoutes;

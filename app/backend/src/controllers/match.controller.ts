@@ -18,6 +18,19 @@ class MatchController {
       next(error);
     }
   };
+
+  insertMatch: RequestHandler = async (req, res, next) => {
+    try {
+      const { body } = req;
+      const newMatchId = await this.matchService.insertMatch({ ...body, inProgress: true });
+
+      //   const newMatch = await this.matchService.findById(newMatchId);
+
+      return res.status(201).json(newMatchId);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchController;
