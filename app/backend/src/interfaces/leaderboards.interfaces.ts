@@ -12,5 +12,6 @@ export interface ILeaderboard {
 }
 
 export interface ILeaderboardService {
-  getLeaderboard(team1: string, team2: string): Promise<ILeaderboard[]>
+  getLeaderboard(team1: string, team2: string): Promise<ILeaderboard[]>;
+  getLeaderboardAll(): Promise<ILeaderboard[]>
 }

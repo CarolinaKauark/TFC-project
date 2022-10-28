@@ -22,6 +22,15 @@ class LeaderboardController {
       next(error);
     }
   };
+
+  getLeaderboardAll: RequestHandler = async (req, res, next) => {
+    try {
+      const allLeaderboards = await this.service.getLeaderboardAll();
+      return res.status(StatusCodes.OK).json(allLeaderboards);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default LeaderboardController;
