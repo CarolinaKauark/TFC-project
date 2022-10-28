@@ -23,6 +23,17 @@ ROUND(((totalVictories * 3 + totalDraws) / (totalGames * 3) * 100), 2) AS effici
 FROM (${query}) AS leaderboard
 ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC, goalsOwn DESC;`;
 
+// const leaderboardAllQuery = (queryHome: string, queryAway: string) => `SELECT
+// name,
+// SUM(goalsFavor) AS goalsFavor,
+// SUM(goalsOwn) AS goalsOwn,
+// SUM(goalsBalance) goalsBalance,
+// SUM(totalVictories) AS totalVictories,
+// SUM(totalLosses) AS totalLosses,
+// SUM(totalDraws) AS totalDraws,
+// SUM(totalGames) AS totalGames
+// FROM (${queryHome}) UNION (${queryAway})`;
+
 class LeaderboardService implements ILeaderboardService {
   constructor(private modelSequelize = sequelizeModel) {}
 
@@ -32,6 +43,13 @@ class LeaderboardService implements ILeaderboardService {
       { type: QueryTypes.SELECT },
     );
   }
+
+//   async getLeaderboardAll(): Promise<ILeaderboard[]> {
+//     return this.modelSequelize.query(
+//       leaderboardQuery1(leaderboardAllQuery(leaderboardQuery2(team1, team2), leaderboardQuery2(team1, team2))),
+//       { type: QueryTypes.SELECT },
+// //     );
+//   }
 }
 
 export default LeaderboardService;
