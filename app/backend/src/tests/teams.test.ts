@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Testa a rota login', () => {
+describe('Testa a rota teams', () => {
 
   let chaiHttpResponse: Response;
 
@@ -50,6 +50,5 @@ describe('Testa a rota login', () => {
     expect(chaiHttpResponse.status).to.equal(200);
     expect(chaiHttpResponse.body).to.deep.equal(team);
   });
-
 
 });
