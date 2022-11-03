@@ -113,6 +113,48 @@ describe('testa a rota matches', () => {
       expect(chaiHttpResponse.status).to.equal(422);
       expect(chaiHttpResponse.body).to.deep.equal({message: 'It is not possible to create a match with two equal teams'});
     });
+
+    it('testa ao acontecer um erro o throw new error do auth middleware é chamado', async () => {
+      sinon
+          .stub(Match, "create")
+          .resolves(insertMatch as IMatch[] | any);
+      sinon
+          .stub(jwt, 'verify').throws();
+      const chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set('Authorization', tokenMock)
+        .send({
+          homeTeam: 8,
+          awayTeam: 10, 
+          homeTeamGoals: 2,
+          awayTeamGoals: 2,
+        })
+    
+      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.body).to.deep.equal({message: 'Token must be a valid token'});
+    });
+
+    it('testa se o errorGenerator é chamado sem o token', async () => {
+      sinon
+          .stub(Match, "create")
+          .resolves(insertMatch as IMatch[] | any);
+      sinon
+          .stub(jwt, 'verify').throws();
+      const chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set('Authorization', '')
+        .send({
+          homeTeam: 8,
+          awayTeam: 10, 
+          homeTeamGoals: 2,
+          awayTeamGoals: 2,
+        })
+    
+      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.body).to.deep.equal({message: 'Token not found'});
+    });
   });
 
   describe('testa a rota patch /matches', () => {
