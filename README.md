@@ -41,13 +41,13 @@ Para a geração e autenticação de token foi utilizado o JSON Web Token - <str
   npm run compose:up
   ```
 
-  - Esses serviços irão inicializar um container chamado `db` , `aoo_` e outro chamado `blogs_api_db`;
+  - Esses serviços irão inicializar um container chamado `app-frontend-1` , `app_backend` e outro chamado `db`;
+  - Caso ocorra algum erro, você pode verificar os logs dos containers com o comando `docker-compose logs <nome-do-seu-serviço>`;
 
-  - A partir daqui você pode rodar o container `blogs_api` via CLI ou abri-lo no VS Code;
 
   👉 <strong>2.2 Use o comando:</strong>
   ```
-  docker exec -it blogs_api bash
+  docker exec -it app_backend bash
   ```
   - Ele te dará acesso ao terminal interativo do container criado pelo compose, que está rodando em segundo plano.
 
