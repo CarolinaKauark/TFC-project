@@ -36,14 +36,12 @@ Para a geração e autenticação de token foi utilizado o JSON Web Token - <str
   **:warning: Seu docker-compose precisa estar na versão 1.29 ou superior. [Veja aqui](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) ou [na documentação](https://docs.docker.com/compose/install/) como instalá-lo. No primeiro artigo, você pode substituir onde está com `1.26.0` por `1.29.2`.**
 
 
-  👉 <strong> 2.1 Rode os serviços `node` e `db` com o comando: </strong>
+  👉 <strong> 2.1 Rode os serviços `react` , `node` e `db` com o comando: </strong>
   ```
-  docker-compose up -d --build
+  npm run compose:up
   ```
 
-  :warning: Lembre-se de parar qualquer aplicação que estiver usando localmente na porta padrão (`3306`), seja docker ou mySQL, ou adapte, caso queria fazer uso da aplicação em containers;
-
-  - Esses serviços irão inicializar um container chamado `blogs_api` e outro chamado `blogs_api_db`;
+  - Esses serviços irão inicializar um container chamado `db` , `aoo_` e outro chamado `blogs_api_db`;
 
   - A partir daqui você pode rodar o container `blogs_api` via CLI ou abri-lo no VS Code;
 
